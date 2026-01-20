@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e88e5, #26c6da);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 420px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  animation: slideFade 0.6s ease;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e88e5;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #444;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #1e88e5, #26c6da);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+.dashboard-box {
+  background: #f4f8fb;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.logout {
+  background: linear-gradient(90deg, #e53935, #ef5350);
+}
+.back-btn{
+  display:inline-block;
+  margin-bottom:15px;
+  text-decoration:none;
+  color:#007bff;
+}
+

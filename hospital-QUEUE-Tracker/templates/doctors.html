@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/admin-dashboard.css">
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Token</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Department</th>
+            <th>Problem</th>
+            <th>Status</th>
+            <th>Next Visit</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for p in patients %}
+        <tr>
+            <td>{{ p.token }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.phone }}</td>
+            <td>{{ p.department }}</td>
+            <td>{{ p.problem }}</td>
+            <td>{{ p.status }}</td>
+
+            <td>
+                <form method="POST" action="/update_status">
+                    <input type="hidden" name="pid" value="{{ p.id }}">
+
+                    <input
+                        type="date"
+                        name="next_visit"
+                        value="{{ p.next_visit if p.next_visit }}"
+                    >
+            </td>
+
+            <td>
+                    <select name="status">
+                        <option value="waiting"
+                            {% if p.status == 'waiting' %}selected{% endif %}>
+                            Waiting
+                        </option>
+
+                        <option value="called"
+                            {% if p.status == 'called' %}selected{% endif %}>
+                            Called
+                        </option>
+
+                        <option value="completed"
+                            {% if p.status == 'completed' %}selected{% endif %}>
+                            Completed
+                        </option>
+                    </select>
+
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="/logout">Logout</a>
+
+</body>
+</html>

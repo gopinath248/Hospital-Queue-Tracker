@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doctor Dashboard</title>
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  margin: 0;
+  padding: 30px;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+p {
+  text-align: center;
+  font-size: 18px;
+  color: #e0f7fa;
+  margin-bottom: 25px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: slideUp 0.7s ease;
+}
+
+th {
+  background: linear-gradient(135deg, #0077b6, #023e8a);
+  color: white;
+  padding: 14px;
+  text-align: left;
+  font-size: 16px;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 15px;
+}
+
+/* Row hover */
+tr {
+  transition: 0.3s;
+}
+
+tr:hover {
+  background: #f1faff;
+  transform: scale(1.01);
+}
+
+/* Buttons */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right: 5px;
+}
+
+/* Call Button */
+button:nth-child(1) {
+  background: #00b4d8;
+  color: white;
+}
+
+button:nth-child(1):hover {
+  background: #0096c7;
+  transform: translateY(-2px);
+}
+
+/* Complete Button */
+button:nth-child(2) {
+  background: #38b000;
+  color: white;
+}
+
+button:nth-child(2):hover {
+  background: #2d6a4f;
+  transform: translateY(-2px);
+}
+
+/* Followup Button */
+button:nth-child(3) {
+  background: #ff9f1c;
+  color: white;
+}
+
+button:nth-child(3):hover {
+  background: #ff7b00;
+  transform: translateY(-2px);
+}
+
+/* Logout link */
+a {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 18px;
+  background: #ef233c;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+a:hover {
+  background: #d90429;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+</head>
+<body>
+<h2>Doctor Dashboard - {{ department }}</h2>
+<p>Welcome Dr. {{ username }}</p>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Token</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Problem</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  {% for p in patients %}
+  <tr>
+    <td>{{ p.token }}</td>
+    <td>{{ p.name }}</td>
+    <td>{{ p.phone }}</td>
+    <td>{{ p.problem }}</td>
+    <td>{{ p.status }}</td>
+    <td>
+      {% if p.status == "waiting" %}
+        <button onclick="callPatient('{{ p.token }}')">Call</button>
+      {% elif p.status == "called" %}
+        <button onclick="completePatient('{{ p.token }}')">Complete</button>
+        <button onclick="followupPatient('{{ p.token }}')">Followup</button>
+      {% else %}
+        Completed
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>
+<a href="/logout">Logout</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const deptSelect = document.getElementById("dept-select");
+
+  if(deptSelect){
+    deptSelect.addEventListener("change", () => {
+      const dept = deptSelect.value;
+      if (dept) {
+        window.location.href = `/doctors/${dept}/dashboard`;
+      }
+    });
+  }
+});
+
+// 👇 These must be OUTSIDE DOMContentLoaded
+
+function callPatient(token){
+  let formData = new FormData();
+  formData.append("token", token);
+
+  fetch("/doctor/call_patient", {
+    method: "POST",
+    body: formData
+  }).then(() => location.reload());
+}
+
+function completePatient(token){
+  let formData = new FormData();
+  formData.append("token", token);
+
+  fetch("/doctor/complete_patient", {
+    method: "POST",
+    body: formData
+  }).then(() => location.reload());
+}
+
+function followupPatient(token){
+  let date = prompt("Enter next checkup date (YYYY-MM-DD)");
+
+  if(!date) return;
+
+  let formData = new FormData();
+  formData.append("token", token);
+  formData.append("followup_date", date);
+
+  fetch("/doctor/followup", {
+    method: "POST",
+    body: formData
+  }).then(() => location.reload());
+}
+</script>
+
+</body>
+</html>

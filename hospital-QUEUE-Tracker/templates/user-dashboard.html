@@ -1,0 +1,68 @@
+
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/css/user-dashboard.css">
+</head>
+<body>
+
+<h2>Welcome, {{ username }}</h2>
+
+<!-- PATIENT DETAILS -->
+<div class="card">
+    <h3>Patient Details</h3>
+
+    <label>Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>Phone</label>
+    <input type="text" id="phone" placeholder="Enter phone number">
+</div>
+
+<!-- TOKEN GENERATION -->
+<div class="card">
+    <h3>Generate Token</h3>
+
+    <label>Department</label>
+    <select id="department" onchange="updateDoctorDetails()">
+        <option value="">Select</option>
+        <option value="General">General</option>
+        <option value="ENT">ENT</option>
+        <option value="Dental">Dental</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Psychiatrists">Psychiatrists</option>
+        <option value="Dermatology">Dermatology</option>
+    </select>
+
+    <label>Problem</label>
+    <textarea id="problem"></textarea>
+
+    <button onclick="savePatientAndGenerateToken()">Generate Token</button>
+</div>
+
+<!-- DOCTOR DETAILS -->
+<div class="card" id="doctorCard" style="display:none;">
+    <h3>Doctor Details</h3>
+    <p>Doctor: <b id="doctorName"></b></p>
+    <p>Fees: ₹<span id="doctorFees"></span></p>
+</div>
+
+<!-- LIVE QUEUE -->
+<div class="card">
+    <h3>Live Queue Status</h3>
+    <p>Waiting Patients: <span id="waitingCount">{{ waiting }}</span></p>
+</div>
+
+<!-- TOKEN RESULT -->
+<div class="card" id="result" style="display:none;">
+    <h3>Your Token</h3>
+    <p>Token Number: <b id="tokenNumber"></b></p>
+    <p>Before You: <span id="beforeCnt"></span></p>
+    <p>After You: <span id="afterCnt"></span></p>
+</div>
+
+<a href="/logout">Logout</a>
+
+<script src="/static/js/user-dashboard.js"></script>
+</body>
+</html>

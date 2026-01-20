@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Hospital</title>
+    <link rel="stylesheet" href="/static/css/About.css">
+</head>
+<body>
+
+<header>
+    <h1>🏥 About Our Hospital</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/About">About</a>
+    </nav>
+</header>
+
+<section class="about">
+    <h2>Our Hospital</h2>
+    <p>
+        Our hospital provides world-class healthcare services with experienced doctors,
+        modern equipment and 24/7 emergency support. We focus on patient safety and comfort.
+    </p>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+    <h2>Hospital Gallery</h2>
+    <div class="gallery-grid">
+        <img src="/static/images/hospital1.jpg">
+        <img src="/static/images/hospital2.jpg">
+        <img src="/static/images/hospital3.jpg">
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+    <h2>Contact Details</h2>
+    <p><b>Address:</b> 123 Medical Street, Chennai</p>
+    <p><b>Phone:</b> +91 9876543210</p>
+    <p><b>Email:</b> support@hospital.com</p>
+</section>
+
+<!-- MAP -->
+<section class="map">
+    <h2>Location</h2>
+    <iframe 
+        src="https://www.google.com/maps?q=chennai%20hospital&output=embed"
+        width="100%" height="300" style="border:0;" allowfullscreen>
+    </iframe>
+</section>
+
+<footer>
+    <p>© 2026 Hospital Queue Tracker</p>
+</footer>
+<script>
+function goStatus() {
+    window.location.href = "/status";
+}
+</script>
+</body>
+</html>

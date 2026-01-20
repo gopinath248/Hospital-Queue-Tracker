@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Hospital</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">🏥  city hospital</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/About">About</a>
+    <a href="/login">Login</a>
+  </nav>
+</header>
+
+<div class="main-container">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <div class="card">
+      <h2>Welcome to City Hospital</h2>
+
+      <label>Select Department:</label>
+      <select id="department" onchange="setDepartment(this.value)">
+        <option value="">Select</option>
+        <option value="General">General</option>
+        <option value="ENT">ENT</option>
+        <option value="Dental">Dental</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Psychiatrists">Psychiatrists</option>
+        <option value="Dermatology">Dermatology</option>
+      </select>
+
+      <button onclick="checkStatus()">Check Status</button>
+
+      <div class="queue-box">
+        <h3>Current Queue Status</h3>
+        <p>Patients Waiting: <span id="patientsWaiting">--</span></p>
+        <p>Estimated Wait Time: <span id="waitTime">--</span> mins</p>
+        <p>Crowd Level: <span id="crowdLevel">--</span></p>
+        <p>Waiting Count: <span id="waitingCount">0</span></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Prediction Summary</h3>
+      <p><b>Next Hour:</b> Moderate</p>
+      <p><b>Best Time:</b> 2:00 PM – 3:00 PM</p>
+      <p><b>Expected Wait:</b> 10 mins</p>
+      <p><b>Peak Hours:</b> 10:00 AM – 12:00 PM</p>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <div class="info-card">
+      <h3>🏥 Hospital Info</h3>
+      <p><b>Name:</b> City Hospital</p>
+      <p><b>Location:</b> Chennai</p>
+      <p><b>Open:</b> 24/7 Emergency</p>
+    </div>
+
+    <div class="info-card">
+      <h3>👨‍⚕️ Available Doctors</h3>
+      <ul>
+        <li>Dr. Kumar - General</li>
+        <li>Dr. Arjun - ENT</li>
+        <li>Dr. Priya - Dental</li>
+        <li>Dr. Rajesh - Cardiology</li>
+      </ul>
+    </div>
+
+   <div class="emergency-card">
+  <h2>🚑 Emergency</h2>
+  <p>Call Now: <b>108</b></p>
+
+  <a href="tel:108" class="call-btn">📞 Call Now</a>
+
+  <p>Ambulance: +91 7397067302</p>
+  <a href="tel:+919876543210" class="call-btn secondary">📞 Call Ambulance</a>
+</div>
+
+    <div class="info-card">
+      <h3>💡 Health Tips</h3>
+      <p>✔ Drink more water</p>
+      <p>✔ Wear mask in crowded places</p>
+      <p>✔ Regular health checkups</p>
+    </div>
+
+  </div>
+
+</div> <!-- main-container end -->
+
+
+<!-- ================== HOSPITAL BOTTOM SECTION ================== -->
+
+<div class="bottom-section">
+
+  <!-- GALLERY -->
+  <div class="bottom-card">
+    <h2>🏥 Hospital Gallery</h2>
+
+    <div class="gallery">
+      <img src="/static/images/new-delhi-india-january-2019-260nw-1329827936.webp">
+      <img src="/static/images/istockphoto-1403199883-612x612.jpg">
+      <img src="/static/images/gettyimages-2151316907-612x612.jpg">
+      <img src="/static/images/doctor-showing-support-heart-cardiac-600nw-2623613971.webp">
+      <img src="/static/images/pexels-shvetsa-3786124.jpg">
+       <img src="/static/images/pexels-shvetsa-3844581.jpg">
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="bottom-card">
+    <h2>About City Hospital</h2>
+
+    <p>
+City Hospital is a modern multi-speciality healthcare institution dedicated to providing high-quality medical services with compassion, care, and advanced technology. Established with the vision of delivering affordable and accessible healthcare to all sections of society.
+
+Our hospital is equipped with state-of-the-art infrastructure, advanced diagnostic facilities, and highly experienced doctors across multiple departments.
+
+Patient care is our highest priority. Our doctors and medical staff work round the clock to ensure quality service.
+
+We have implemented a Smart Hospital Queue and Wait-Time Prediction System to help patients plan their visit efficiently.
+    </p>
+
+    <hr>
+
+    <h3>Contact Details</h3>
+    <p><b>Address:</b> City Hospital, 45 Medical Street, Chennai, Tamil Nadu</p>
+    <p><b>Phone:</b> +91 98765 43210</p>
+    <p><b>Emergency:</b> 108</p>
+    <p><b>Email:</b> support@cityhospital.com</p>
+    <p><b>Website:</b> www.cityhospital.com</p>
+
+  </div>
+
+</div>
+
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

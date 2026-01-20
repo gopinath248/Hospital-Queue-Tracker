@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <!-- CSS include -->
+
+</head>
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  margin: 0;
+  padding: 30px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Main Heading */
+h2 {
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* Section Headings */
+h3 {
+  margin-top: 40px;
+  color: #f1faff;
+  font-size: 22px;
+  border-left: 6px solid #00f5d4;
+  padding-left: 12px;
+}
+
+/* Table Card */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  animation: slideUp 0.7s ease;
+}
+
+/* Table Header */
+th {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  color: white;
+  padding: 14px;
+  text-align: left;
+  font-size: 16px;
+}
+
+/* Table Cells */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* Row Hover Effect */
+tr {
+  transition: all 0.3s ease;
+}
+
+tr:hover {
+  background: #f0fbff;
+  transform: scale(1.01);
+}
+
+/* Logout Button */
+a {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #ff4d6d, #c9184a);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+a:hover {
+  background: linear-gradient(135deg, #c9184a, #a4133c);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+<body>
+<h2>Admin Dashboard</h2>
+
+<h3>Users</h3>
+<table id="users-table" border="1" cellpadding="8">
+  <tr><th>ID</th><th>Username</th><th>Role</th></tr>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.id }}</td>
+    <td>{{ u.username }}</td>
+    <td>{{ u.role }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Doctors</h3>
+<table id="doctors-table" border="1" cellpadding="8">
+  <tr><th>ID</th><th>Username</th><th>Department</th></tr>
+  {% for d in doctors %}
+  <tr>
+    <td>{{ d.id }}</td>
+    <td>{{ d.username }}</td>
+    <td>{{ d.department }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br><a id="logout-link" href="/logout">Logout</a>
+
+<!-- JS include -->
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Highlight row on click
+  const tables = document.querySelectorAll("table");
+  tables.forEach(table => {
+    table.addEventListener("click", (e) => {
+      const row = e.target.closest("tr");
+      if (row && row.parentNode.tagName === "TBODY") {
+        row.style.backgroundColor = "#d4edda"; // light green
+        setTimeout(() => row.style.backgroundColor = "", 1500);
+      }
+    });
+  });
+
+  // Confirm logout
+  const logoutLink = document.getElementById("logout-link");
+  if (logoutLink) {
+    logoutLink.addEventListener("click", (e) => {
+      if (!confirm("Are you sure you want to logout?")) {
+        e.preventDefault();
+      }
+    });
+  }
+});
+
+</script>
+</body>
+</html>
